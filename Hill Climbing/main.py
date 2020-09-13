@@ -1,5 +1,6 @@
 from sys import exit
 from hillclimbing import ChessBoard
+import timeit
 
 with open('input.txt') as file:
     grid = []
@@ -23,6 +24,12 @@ with open('input.txt') as file:
             exit(-1)
         queens.append(row)
     chess = ChessBoard(queens)
+    start = timeit.default_timer()
     chess.hillclimbing()
+    stop = timeit.default_timer()
+    print('Best chess')
     print(chess.get_table())
+    print('Score')
     print(chess.get_score())
+    print('Time')
+    print('%.6f' %(1000 * (stop - start)))

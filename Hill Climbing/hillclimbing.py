@@ -1,3 +1,5 @@
+from math import inf as INF
+
 class ChessBoard:
     def __init__ (self, queens):
         self.N = len(queens)
@@ -8,42 +10,38 @@ class ChessBoard:
         for c in range(self.N):
             r = self.queens[c]
             table[r][c] = 1
-        return "\n".join(''.join(str(c) for c in row) for row in table)
+        return "\n".join(' '.join(str(c) for c in row) for row in table)
 
     def get_score (self):
         return self.compute_score(self.queens)
 
     def compute_score (self, state):
-        n_non_attacked_pieces = 0
-        for row in range(self.N):
-            for col in range(self.N):
-                attacked = False
-                for c in range(self.N):
-                    r = state[c]
-                    if r == row or abs(r - row) == abs(c - col):
-                        attacked = True
-                        break
-                if not attacked:
-                    n_non_attacked_pieces += 1
-        return n_non_attacked_pieces
+        score = 0
+        for c1 in range(self.N):
+            r1 = self.queens[c1]
+            for c2 in range(c1 + 1, self.N):
+                r2 = self.queens[c2]
+                if r1 == r2 or abs(r1 - r2) == abs(c1 - c2):
+                    score += 1
+        return score
+
 
     def hillclimbing (self):
-        best_next_state = []
-        best_score = 0
-        
-        for c in range(self.N):
-            prev = self.queens[c]
-            for r in range(self.N):
-                if r == prev:
-                    continue
-                self.queens[c] = r
-                score = self.compute_score(self.queens)
-                if best_score < score:
-                    best_score = score
-                    best_next_state = [r for r in self.queens]
-            self.queens[c] = prev
-        
-        if best_score <= self.compute_score(self.queens):
-            return
-        self.queens = best_next_state
-        self.hillclimbing()
+        while True:
+            best_next_state = []
+            best_score = INF
+            for c in range(self.N):
+                prev = self.queens[c]
+                for r in range(self.N):
+                    if r == prev:
+                        continue
+                    self.queens[c] = r
+                    score = self.compute_score(self.queens)
+                    if score < best_score:
+                        best_score = score
+                        best_next_state = [r for r in self.queens]
+                self.queens[c] = prev    
+    
+            if best_score >= self.compute_score(self.queens):
+                break
+            self.queens = best_next_state
