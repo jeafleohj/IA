@@ -1,53 +1,49 @@
 class ChessBoard:
-    def __init__(self, pos, N = 8):
-        self.N = N
-        self.table = [[0 for i in range(N)] for j in range(N)]
-        self.queens = []
-        for i in range(0,16,2):
-            self.table[pos[i]][pos[i+1]] = 'Q'
-            self.queens.append((pos[i], pos[i + 1]))
-        self.queens.sort()
-        for i in self.table:
-            print(i)
+    def __init__ (self, queens):
+        self.N = len(queens)
+        self.queens = queens
 
-    def setPiece (self, row, col):
-        self.table[row][col] = 'Q'
+    def get_table (self):
+        table = [[0 for i in range(self.N)] for j in range(self.N)]
+        for c in range(self.N):
+            r = self.queens[c]
+            table[r][c] = 1
+        return "\n".join(''.join(str(c) for c in row) for row in table)
 
-    def compute_score (self):
-        n_attacked_pieces = 0
+    def get_score (self):
+        return self.compute_score(self.queens)
+
+    def compute_score (self, state):
+        n_non_attacked_pieces = 0
         for row in range(self.N):
             for col in range(self.N):
                 attacked = False
-                for r, c in self.queens:
-                    if r == row or c == col or abs(r - row) == abs(c - col):
+                for c in range(self.N):
+                    r = state[c]
+                    if r == row or abs(r - row) == abs(c - col):
                         attacked = True
                         break
-                if attacked:
-                    n_attacked_pieces += 1
-        return n_attacked_pieces
+                if not attacked:
+                    n_non_attacked_pieces += 1
+        return n_non_attacked_pieces
 
     def hillclimbing (self):
-        next_state = self.queens
-        self.best_next_state = []
-        self.best_score = 0
+        best_next_state = []
+        best_score = 0
         
-        def neightboor(next_state):
-            if len(next_state) == self.N:
-                self.queens, next_state = next_state, self.queens
-                score = self.compute_score()
-                if self.best_score < score:
-                    score = self.best_score
-                    self.best_next_state = next_state
-                self.queens, next_state = next_state, self.queens
-                return
-            row = len(next_state)
-            for col in range(self.N):
-                next_state.append((row, col))
-                neightboor(next_state)
-                next_state.pop()
-
-        neightboor([])
-        if self.best_score <= self.compute_score():
+        for c in range(self.N):
+            prev = self.queens[c]
+            for r in range(self.N):
+                if r == prev:
+                    continue
+                self.queens[c] = r
+                score = self.compute_score(self.queens)
+                if best_score < score:
+                    best_score = score
+                    best_next_state = [r for r in self.queens]
+            self.queens[c] = prev
+        
+        if best_score <= self.compute_score(self.queens):
             return
-        self.queens = self.best_next_state
+        self.queens = best_next_state
         self.hillclimbing()
