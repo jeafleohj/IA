@@ -1,31 +1,27 @@
 #+TITLE: 8 Reinas
 
-* Input
-La primera linea indica al número de test, los siguientes 8 lineas
-esta compuesta por las coordenadas de la reina y cada casa esta separado por un espacio
-#+caption: Ejemplo de input
-#+begin_src text
-2
-
-0 0
-1 4
-2 4
-3 4
-4 3
-5 4
-6 4
-7 4
-
-0 0
-1 1
-2 2
-3 3
-4 4
-5 5
-6 6
-7 7
+El input para el programa es una matriz binario donde los 1 indica la posición de las reinas
+#+begin_src txt
+0 0 0 1 0 0 0 0
+1 0 0 0 0 0 0 0
+0 0 1 0 0 0 0 0
+0 1 0 0 0 0 0 0
+0 0 0 0 1 0 0 0
+0 0 0 0 0 1 0 0
+0 0 0 0 0 0 0 1
+0 0 0 0 0 0 1 0
 #+end_src
 
-* Output
-* Heurística
+La ejecución se realiza mediante el comando: ~python main.py~
+
+
+* Simulación
+Genera todos los tableros de ajedrez para determinar los sgte:
+- Tiempo máximo que se demora el algoritmo /Hill climbing/
+- Las frecuencias de los scores mínimos
+La ejecución del programa es mediante:
+- ~python simulation.py~
+- ~pypy3 simulation.py~
+  
+[[./img/Figure_1.png]]
 
