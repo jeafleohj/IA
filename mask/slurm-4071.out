@@ -1,0 +1,72 @@
+2020-12-18 12:39:43.332740: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'libcudart.so.10.1'; dlerror: libcudart.so.10.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/apps/Python-3.7.7/lib
+2020-12-18 12:39:43.332785: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+/opt/apps/Python-3.7.7/lib/python3.7/site-packages/PIL/Image.py:952: UserWarning: Palette images with Transparency expressed in bytes should be converted to RGBA images
+  "Palette images with Transparency expressed in bytes should be "
+WARNING:tensorflow:`input_shape` is undefined or non-square, or `rows` is not in [96, 128, 160, 192, 224]. Weights for input shape (224, 224) will be loaded as the default.
+2020-12-18 12:40:16.471754: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcuda.so.1
+2020-12-18 12:40:16.511832: E tensorflow/stream_executor/cuda/cuda_driver.cc:314] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-12-18 12:40:16.511890: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (n002): /proc/driver/nvidia/version does not exist
+2020-12-18 12:40:16.512540: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-12-18 12:40:16.521301: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 2100000000 Hz
+2020-12-18 12:40:16.521523: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4aec870 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-12-18 12:40:16.521545: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/mobilenet_v2/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.0_224_no_top.h5
+Traceback (most recent call last):
+  File "/opt/apps/Python-3.7.7/lib/python3.7/urllib/request.py", line 1319, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/opt/apps/Python-3.7.7/lib/python3.7/http/client.py", line 1252, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/http/client.py", line 1298, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/http/client.py", line 1247, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/opt/apps/Python-3.7.7/lib/python3.7/http/client.py", line 1414, in connect
+    super().connect()
+  File "/opt/apps/Python-3.7.7/lib/python3.7/http/client.py", line 938, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/socket.py", line 728, in create_connection
+    raise err
+  File "/opt/apps/Python-3.7.7/lib/python3.7/socket.py", line 716, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/apps/Python-3.7.7/lib/python3.7/site-packages/tensorflow/python/keras/utils/data_utils.py", line 278, in get_file
+    urlretrieve(origin, fpath, dl_progress)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/urllib/request.py", line 247, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+  File "/opt/apps/Python-3.7.7/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/urllib/request.py", line 525, in open
+    response = self._open(req, data)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/urllib/request.py", line 543, in _open
+    '_open', req)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/urllib/request.py", line 1362, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/opt/apps/Python-3.7.7/lib/python3.7/urllib/request.py", line 1321, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 101] Network is unreachable>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "training.py", line 20, in <module>
+    model = build_model()
+  File "/home/leonidas.garcia/IA/mask/util_training.py", line 53, in build_model
+    input_tensor = Input(shape = (224, 224, 3)))
+  File "/opt/apps/Python-3.7.7/lib/python3.7/site-packages/tensorflow/python/keras/applications/mobilenet_v2.py", line 409, in MobileNetV2
+    model_name, weight_path, cache_subdir='models')
+  File "/opt/apps/Python-3.7.7/lib/python3.7/site-packages/tensorflow/python/keras/utils/data_utils.py", line 282, in get_file
+    raise Exception(error_msg.format(origin, e.errno, e.reason))
+Exception: URL fetch failure on https://storage.googleapis.com/tensorflow/keras-applications/mobilenet_v2/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.0_224_no_top.h5: None -- [Errno 101] Network is unreachable
+/var/spool/slurmd/job04071/slurm_script: line 0: unalias: pip: not found
+/var/spool/slurmd/job04071/slurm_script: line 0: unalias: python: not found
