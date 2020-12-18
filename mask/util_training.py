@@ -18,7 +18,7 @@ from tensorflow.keras.optimizers import SGD
 
 INIT_LR = 1e-4   # Learning rate
 EPOCHS = 50      # Número de epochs
-BS = 2          # Batch size
+BS = 32          # Batch size
 
 def load_images (route1, route2):
     data, labels = [], []
@@ -75,7 +75,7 @@ def build_model ():
 def draw_metrics (EPOCHS, H):
     # Graficamos las métricas calculadas
     plt.style.use("ggplot")
-    plt.figure(figsize=(24, 12))
+    plt.figure(figsize = (24, 12))
     plt.plot(np.arange(0, EPOCHS), H.history['loss'], label='entrenamiento:loss')
     plt.plot(np.arange(0, EPOCHS), H.history['val_loss'], label='validación:loss')
     plt.plot(np.arange(0, EPOCHS), H.history['accuracy'], label='entrenamiento:accuracy')
