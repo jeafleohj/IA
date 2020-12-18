@@ -18,7 +18,7 @@ from tensorflow.keras.optimizers import SGD
 
 INIT_LR = 1e-4   # Learning rate
 EPOCHS = 50      # Número de epochs
-BS = 32          # Batch size
+BS = 2          # Batch size
 
 def load_images (route1, route2):
     data, labels = [], []
@@ -43,7 +43,7 @@ def encode_labels (labels):
     # Usaremos one-hot encoding para codificar los labels
     lb = LabelBinarizer()
     labels = lb.fit_transform(labels)
-    return to_categorical(labels)
+    return lb, to_categorical(labels)
 
 def build_model ():
     # Construimos la red MobileNetV2 pero sin incluir la capa top

@@ -11,7 +11,7 @@ from util_training import *
 data, labels = load_images('data/with_mask/', 'data/without_mask/')
 
 # One-Hot encoding de los labels
-labels = encode_labels(labels)
+lb, labels = encode_labels(labels)
 
 # 80% training - 20% testing
 X_train, X_test, Y_train, Y_test = train_test_split(data, labels, test_size = 0.15,
