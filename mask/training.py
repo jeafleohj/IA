@@ -7,6 +7,9 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import classification_report
 from util_training import *
 
+data, labels = load_images('data')
+labels = encode_labels(labels)
+
 # 80% training - 20% testing
 X_train, X_test, Y_train, Y_test = train_test_split(data, labels, test_size = 0.15,
                                                     stratify = labels, random_state = 40)
