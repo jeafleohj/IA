@@ -46,6 +46,7 @@ def detect_masks (frame, detections, mask_model):
         face = preprocess_input(face)
         faces.append(face)
         locs.append((x1, y1, x2, y2))
+        
     if len(faces) > 0:
         faces = np.array(faces, dtype='float32')
         labels = mask_model.predict(faces, batch_size=BATCH_SIZE)
