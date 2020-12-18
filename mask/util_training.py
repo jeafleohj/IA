@@ -1,7 +1,8 @@
 import os
+from os import listdir
+from os.path import isfile, join
 import numpy as np
 import matplotlib.pyplot as plt
-from imutils import paths
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
@@ -19,23 +20,21 @@ INIT_LR = 1e-4   # Learning rate
 EPOCHS = 50      # Número de epochs
 BS = 32          # Batch size
 
-def load_images (path):
-    # El directorio path debe contener data en el formato
-    # clase1/
-    # clase2/
-    paths_list = list(paths.list_images(path))
+def load_images (route1, route2):
     data, labels = [], []
-    for path in paths_list:
-        label = path.split(os.path.sep)[-2]
-        # Redimencionamos la imagen a 224x224 y le damos el formato
-        # que necesitará nuestra red MobileNetV2 mediante la función
-        # que este modelo nos proporciona
-        # Referencia: https://arxiv.org/abs/1801.04381
-        image = load_img(path, target_size = (224, 224))
-        image = img_to_array(image)
-        image = preprocess_input(image)
-        data.append(image)
-        labels.append(label)
+    for route in [route1, route2]:
+        paths_list = list(join(route, f) for f in listdir(route) if isfile(join(route, f)))
+        label = route.split(os.path.sep)[-2]
+        for path in paths_list:
+            # Redimencionamos la imagen a 224x224 y le damos el formato
+            # que necesitará nuestra red MobileNetV2 mediante la función
+            # que este modelo nos proporciona
+            # Referencia: https://arxiv.org/abs/1801.04381
+            image = load_img(path, target_size = (224, 224))
+            image = img_to_array(image)
+            image = preprocess_input(image)
+            data.append(image)
+            labels.append(label)
     data = np.array(data, dtype = 'float32')
     labels = np.array(labels)
     return data, labels

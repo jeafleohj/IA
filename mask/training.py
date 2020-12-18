@@ -7,7 +7,10 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import classification_report
 from util_training import *
 
-data, labels = load_images('data')
+# Lectura de la data
+data, labels = load_images('data/with_mask/', 'data/without_mask/')
+
+# One-Hot encoding de los labels
 labels = encode_labels(labels)
 
 # 80% training - 20% testing
