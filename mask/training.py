@@ -37,7 +37,7 @@ H = model.fit(aug.flow(X_train, Y_train, batch_size = BS),
 predictions = model.predict(X_test, batch_size = BS)
 
 # Imprimimos las métricas
-print(classification_report(Y_test.argmax(axis=1), predictions.argmax(axis = 1), target_names=lb.classes_))
+print(classification_report(Y_test.argmax(axis = 1), predictions.argmax(axis = 1), target_names = lb.classes_))
 
 # Guardamos el modelo
 model.save('mask_detector.hdf5')
