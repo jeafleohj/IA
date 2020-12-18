@@ -18,7 +18,7 @@ def load_models ():
     weight_path = os.path.sep.join(['face_detector', 'res10_300x300_ssd_iter_140000.caffemodel'])
     face_model = cv2.dnn.readNet(proto_path, weight_path)
     # Cargando el modelo de detección de mascarillas
-    mask_model = load_model('mask_detector.model')
+    mask_model = load_model('mask_detector.hdf5')
     return face_model, mask_model
 
 def detect_faces (frame, face_model):
